@@ -64,12 +64,14 @@ _Explore more insights in the full Power BI dashboard_
 
 **Source**
 
-- X
 - Since the original supply chain dataset did not contain time-series sales records, a new synthetic dataset with historical sales data was used to build and validate the forecasting model.
+- Time Series Supply Chain Dataset (from Kaggle)
+
+https://www.kaggle.com/datasets/philiphyde1/time-series-supply-chain-dataset/data?
 
 **Period**
 
-- X
+- Between 2020 to 202
 
 _**About Me**_
 

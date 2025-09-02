@@ -21,7 +21,7 @@ https://www.kaggle.com/datasets/amirmotefaker/supply-chain-dataset/data
 
 - SQLit: Validated data completeness
     + Column types: No anomaly → Pass
-    + %Blank/null: 0% for all columns --> Pass
+    + %Blank/null: 0% for all columns → Pass
     + %Zero Value for numeric columns: 0-1% for all columns → Pass
     + Outlier for numeric columns: Min - Max within reasonable range
 - Power BI: Built dashboards to analyze .
@@ -56,7 +56,7 @@ https://www.kaggle.com/datasets/amirmotefaker/supply-chain-dataset/data
 **A. Project Overview**
 
 - Extended the project with a demand forecasting model to support the action plan from Version 1 (Inventory Optimization), using time series sales data to predict future demand and improve stock availability.
-
+- Number of Pieces Predictive to become the base for optimizing inventory.
 
 _Explore more insights in the full Power BI dashboard_
 
@@ -71,7 +71,46 @@ https://www.kaggle.com/datasets/philiphyde1/time-series-supply-chain-dataset/dat
 
 **Period**
 
-- Between 2020 to 202
+- Between 2020 to 2025
+
+**C. Methodology**
+
+- Define forecast variable: NumberOfPieces, aggregated weekly
+- Data preprocessing:
+  + Convert type of WorkDate to datetime
+  + Resample by week (main), also by day and month for comparison
+  + Group by Customer & Location
+- Split dataset into Train (2020–2024) and Test (2025)
+- Baseline Models: Naive Forecast, Holt-Winters
+- Time-series Models: SARIMA, Prophet
+
+**D. Key Findings & Actionable Plans**
+
+**_Key Findings_**
+- Naive Forecast:
+  + Forecast for the next period equals the last observed value.
+  + While simple to implement, it ignores both trend and seasonality.
+→ Naive forecast serves only as a baseline reference, useful for comparison but not reliable for decision-making.
+- Holt-Winters:
+  + Captured both trend and yearly seasonality by applying level, trend, and seasonal smoothing components.
+  + It improved accuracy compared to Naive but lagged behind advanced models when data showed strong fluctuations and irregularities.
+→ Holt-Winters provides a reasonable improvement over Naive and can be used for short-term forecasting, but it is less precise for complex supply chain patterns.
+- SARIMA Result:
+  + The SARIMA model was tuned through grid search and identified the best parameters as SARIMA(1,1,1)(1,1,0,52).
+  + The model achieved an AIC of ~3092 and a MAPE of ~14% on the 2025 test set, indicating a reasonably accurate forecast.
+  + Diagnostic checks confirmed that residuals have no significant autocorrelation, though they deviate from perfect normality, which is common in real-world time series.
+→ SARIMA provides robust predictive performance, making it suitable for operational planning. With a forecast error of ~14%, it can guide inventory and supply chain decisions with high reliability.
+- Prophet Result:
+  + The Prophet model was trained on the same weekly data and produced forecasts for 2025 with a MAPE of ~19%.
+  + Prophet visualizations highlighted a clear upward trend across years and seasonality patterns: demand typically dips around mid-year (May–July) and peaks at year-end (November–December).
+  + The forecast intervals (yhat_lower, yhat_upper) provide transparency into uncertainty, which is valuable for risk-aware planning.
+→ Prophet is highly effective for communicating trends and seasonality to stakeholders. It complements SARIMA by making forecasts more explainable and visually intuitive, even if the precision is slightly lower.
+
+**_Actionable Plans_**
+
+- Adopt **SARIMA** as the primary forecasting engine for inventory planning.  
+- Use **Prophet** mainly for communication and visualization, helping management easily understand long-term trends and seasonality.  
+→ Both methods are consistent: SARIMA ensures accuracy for operations, while Prophet enhances stakeholder engagement and explainability.
 
 _**About Me**_
 

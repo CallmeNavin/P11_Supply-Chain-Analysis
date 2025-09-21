@@ -6,7 +6,7 @@
 
 - This project analyzes Company X supply chain's performance and identify operational risks with actionable improvement plans.
 
-![Dashboard Visualization](https://github.com/CallmeNavin/P11_Supply-Chain-Analysis/blob/main/Version%201/Visualization/Overview.png)
+![Dashboard Visualization](https://github.com/CallmeNavin/P11_Supply-Chain-Analysis/blob/main/Version%201/Visualization/Dashboard.png)
 _Explore more insights in the full Power BI dashboard_
 
 **B. Dataset Information**
